@@ -151,6 +151,32 @@ describe('Get and get top recommendations unit test', () => {
   });
 
   it('Get top recommendations', async () => {
+    const recommendations = [{
+      id: 1,
+      name: "Kodak Black - Super Gremlin",
+      youtubeLink: "https://www.youtube.com/watch?v=kiB9qk4gnt4",
+      score: 10
+    },
+    {
+      id: 2,
+      name: "Kodak Black - Skrilla",
+      youtubeLink: "https://www.youtube.com/watch?v=SmwmZfMooSo",
+      score: 100
+    },
+    {
+      id: 3,
+      name: "Kodak Black - No Flockin",
+      youtubeLink: "https://www.youtube.com/watch?v=UE_-obgiWm0",
+      score: 1000
+    },
+    ];
 
-  })
+    jest.spyOn(recommendationRepository, 'getAmountByScore').mockResolvedValueOnce(recommendations);
+    
+    await recommendationService.getTop(3);
+    /* const result = await recommendationService.getTop(2);
+    console.log(result) */
+    expect(recommendationRepository.getAmountByScore).toBeCalled();
+    /* expect(result.length).toBe(2); */
+  });
 });

@@ -114,6 +114,7 @@ describe('Test GET routes', () => {
     expect(result.body.length).toBe(10);
   });
 
+  //esse teste as vezes quebra, procurar soluções.
   it('Get top 20 recommendations with most upvotes', async () => {
     for (let i = 0; i < 20; i++) {
       await createRecommendationAndGiveUpvote(i);
