@@ -1,13 +1,13 @@
-import app from "../src/app";
+import app from "../../src/app";
 import supertest from 'supertest';
-import { prisma } from '../src/database';
+import { prisma } from '../../src/database';
 import {
   createNewRecommendation,
   createNewRecommendationWrongLink,
   createNewRecommendationMissingTitle,
   createRecommendationAndGiveUpvote
-} from './factories/recommendationFactory'
-import { createTenRecommendations } from './factories/scenarioFactory'
+} from '../factories/recommendationFactory'
+import { createTenRecommendations } from '../factories/scenarioFactory'
 
 beforeEach(async () => {
   await prisma.$executeRaw`TRUNCATE TABLE "recommendations"`;
@@ -109,7 +109,6 @@ describe('Test GET routes', () => {
       await createRecommendationAndGiveUpvote(i);
     };
     const result = await server.get(`/recommendations/top/${10}`);
-    console.log(result.body)
     expect(result.status).toBe(200);
     expect(result.body).toBeInstanceOf(Array);
     expect(result.body.length).toBe(10);
@@ -120,7 +119,6 @@ describe('Test GET routes', () => {
       await createRecommendationAndGiveUpvote(i);
     };
     const result = await server.get(`/recommendations/top/${20}`);
-    console.log(result.body)
     expect(result.status).toBe(200);
     expect(result.body).toBeInstanceOf(Array);
     expect(result.body.length).toBe(20);
