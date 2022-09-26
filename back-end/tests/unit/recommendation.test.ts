@@ -119,7 +119,33 @@ describe('Upvote and Downvote unit test', () => {
 });
 
 describe('Get random recommendation unit test', () => {
-  it.todo('Get random recommendation');
+  it('Get random recommendation -> 30% case', async () => {
+    const recommendations = [{
+      id: 1,
+      name: "Kodak Black - Super Gremlin",
+      youtubeLink: "https://www.youtube.com/watch?v=kiB9qk4gnt4",
+      score: 10
+    },
+    {
+      id: 2,
+      name: "Kodak Black - Skrilla",
+      youtubeLink: "https://www.youtube.com/watch?v=SmwmZfMooSo",
+      score: 100
+    },
+    {
+      id: 3,
+      name: "Kodak Black - No Flockin",
+      youtubeLink: "https://www.youtube.com/watch?v=UE_-obgiWm0",
+      score: -5
+    },
+    ];
+
+    /* jest.spyOn(recommendationService, 'getScoreFilter').mockResolvedValueOnce('gt') */
+
+    jest.spyOn(recommendationRepository, 'findAll').mockResolvedValueOnce(recommendations)
+    /* jest.spyOn(recommendationService, 'getByScore').mockResolvedValueOnce(recommendations) */
+    
+  });
 });
 
 describe('Get and get top recommendations unit test', () => {
@@ -172,7 +198,7 @@ describe('Get and get top recommendations unit test', () => {
     ];
 
     jest.spyOn(recommendationRepository, 'getAmountByScore').mockResolvedValueOnce(recommendations);
-    
+
     await recommendationService.getTop(3);
     /* const result = await recommendationService.getTop(2);
     console.log(result) */

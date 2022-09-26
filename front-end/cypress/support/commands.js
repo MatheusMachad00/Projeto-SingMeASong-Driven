@@ -51,5 +51,14 @@ Cypress.Commands.add("upvoteRecommendation", () => {
   cy.get("#send-button").click();
   cy.wait("@newRecommendation");
 
-  cy.contains(songName).should("be.visible");
+  cy.get("#upvote").click();
+
+  /* cy.contains(songName).should("be.visible"); */
+  cy.get("#score").contains(1).should("be.visible")
 });
+
+/* Cypress.Commands.add("getTopRecommendation", () => {
+  cy.visit("http://localhost:3000/top");
+  cy.get([bla]).should('have.length.lessThan,11) -> ver se o tamanho dos itens é x
+  cy.get("#recommendationId").
+}); */
